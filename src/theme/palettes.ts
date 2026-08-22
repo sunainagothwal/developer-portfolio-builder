@@ -1,0 +1,513 @@
+/**
+ * Color palettes for every theme preset the app supports.
+ * Each preset defines a `light` and `dark` variant shaped like
+ * react-native-paper's MD3 color scheme, plus a handful of custom
+ * "brand" tokens used across the app (gradients, status colors, etc.)
+ */
+
+export interface BrandColors {
+  success: string;
+  warning: string;
+  danger: string;
+  info: string;
+  gradientStart: string;
+  gradientEnd: string;
+}
+
+export interface AppColorScheme {
+  primary: string;
+  onPrimary: string;
+  primaryContainer: string;
+  onPrimaryContainer: string;
+  secondary: string;
+  onSecondary: string;
+  secondaryContainer: string;
+  onSecondaryContainer: string;
+  tertiary: string;
+  onTertiary: string;
+  background: string;
+  onBackground: string;
+  surface: string;
+  onSurface: string;
+  surfaceVariant: string;
+  onSurfaceVariant: string;
+  outline: string;
+  error: string;
+  onError: string;
+  elevation: {
+    level0: string;
+    level1: string;
+    level2: string;
+    level3: string;
+    level4: string;
+    level5: string;
+  };
+  brand: BrandColors;
+}
+
+export interface PalettePair {
+  light: AppColorScheme;
+  dark: AppColorScheme;
+}
+
+const commonBrand: BrandColors = {
+  success: '#2ECC71',
+  warning: '#F5A623',
+  danger: '#E5484D',
+  info: '#3B82F6',
+  gradientStart: '#6C5CE7',
+  gradientEnd: '#00B4D8',
+};
+
+export const PALETTES: Record<string, PalettePair> = {
+  default: {
+    light: {
+      primary: '#5B4CF0',
+      onPrimary: '#FFFFFF',
+      primaryContainer: '#E4E0FF',
+      onPrimaryContainer: '#160066',
+      secondary: '#00A8A8',
+      onSecondary: '#FFFFFF',
+      secondaryContainer: '#C9F5F5',
+      onSecondaryContainer: '#00302E',
+      tertiary: '#F97362',
+      onTertiary: '#FFFFFF',
+      background: '#F7F7FB',
+      onBackground: '#1B1B22',
+      surface: '#FFFFFF',
+      onSurface: '#1B1B22',
+      surfaceVariant: '#E7E5F0',
+      onSurfaceVariant: '#48454F',
+      outline: '#78767F',
+      error: '#BA1A1A',
+      onError: '#FFFFFF',
+      elevation: {
+        level0: 'transparent',
+        level1: '#F4F2FC',
+        level2: '#EFEDFA',
+        level3: '#E9E7F8',
+        level4: '#E7E5F7',
+        level5: '#E2E0F5',
+      },
+      brand: commonBrand,
+    },
+    dark: {
+      primary: '#C3BEFF',
+      onPrimary: '#2A1A9E',
+      primaryContainer: '#4030C4',
+      onPrimaryContainer: '#E4E0FF',
+      secondary: '#4FD8D8',
+      onSecondary: '#003736',
+      secondaryContainer: '#004F4E',
+      onSecondaryContainer: '#C9F5F5',
+      tertiary: '#FFB4A8',
+      onTertiary: '#5F1500',
+      background: '#0F0F14',
+      onBackground: '#E5E2EC',
+      surface: '#17171E',
+      onSurface: '#E5E2EC',
+      surfaceVariant: '#2A2733',
+      onSurfaceVariant: '#CAC5D4',
+      outline: '#948F9C',
+      error: '#FFB4AB',
+      onError: '#690005',
+      elevation: {
+        level0: 'transparent',
+        level1: '#1B1B24',
+        level2: '#1F1E29',
+        level3: '#23222F',
+        level4: '#252430',
+        level5: '#282735',
+      },
+      brand: commonBrand,
+    },
+  },
+
+  github: {
+    light: {
+      primary: '#0969DA',
+      onPrimary: '#FFFFFF',
+      primaryContainer: '#DDF4FF',
+      onPrimaryContainer: '#032C58',
+      secondary: '#1A7F37',
+      onSecondary: '#FFFFFF',
+      secondaryContainer: '#D2F8D2',
+      onSecondaryContainer: '#04260F',
+      tertiary: '#9A6700',
+      onTertiary: '#FFFFFF',
+      background: '#FFFFFF',
+      onBackground: '#1F2328',
+      surface: '#F6F8FA',
+      onSurface: '#1F2328',
+      surfaceVariant: '#EAEEF2',
+      onSurfaceVariant: '#57606A',
+      outline: '#D0D7DE',
+      error: '#CF222E',
+      onError: '#FFFFFF',
+      elevation: {
+        level0: 'transparent',
+        level1: '#F6F8FA',
+        level2: '#F1F3F6',
+        level3: '#EDEFF2',
+        level4: '#EBEDF0',
+        level5: '#E7E9EC',
+      },
+      brand: commonBrand,
+    },
+    dark: {
+      primary: '#58A6FF',
+      onPrimary: '#003258',
+      primaryContainer: '#0C2D6B',
+      onPrimaryContainer: '#DDF4FF',
+      secondary: '#3FB950',
+      onSecondary: '#00390C',
+      secondaryContainer: '#0F5323',
+      onSecondaryContainer: '#D2F8D2',
+      tertiary: '#D29922',
+      onTertiary: '#3F2E00',
+      background: '#0D1117',
+      onBackground: '#E6EDF3',
+      surface: '#161B22',
+      onSurface: '#E6EDF3',
+      surfaceVariant: '#21262D',
+      onSurfaceVariant: '#8B949E',
+      outline: '#30363D',
+      error: '#F85149',
+      onError: '#3B0A0A',
+      elevation: {
+        level0: 'transparent',
+        level1: '#161B22',
+        level2: '#1B2028',
+        level3: '#1F252D',
+        level4: '#212832',
+        level5: '#242B36',
+      },
+      brand: commonBrand,
+    },
+  },
+
+  dracula: {
+    light: {
+      primary: '#6E4FA3',
+      onPrimary: '#FFFFFF',
+      primaryContainer: '#EBDFFF',
+      onPrimaryContainer: '#2B0A57',
+      secondary: '#C4308F',
+      onSecondary: '#FFFFFF',
+      secondaryContainer: '#FFD9EC',
+      onSecondaryContainer: '#3D0021',
+      tertiary: '#0E8C6E',
+      onTertiary: '#FFFFFF',
+      background: '#F8F6FC',
+      onBackground: '#282A36',
+      surface: '#FFFFFF',
+      onSurface: '#282A36',
+      surfaceVariant: '#EBE6F5',
+      onSurfaceVariant: '#4C4757',
+      outline: '#8A8494',
+      error: '#D6284A',
+      onError: '#FFFFFF',
+      elevation: {
+        level0: 'transparent',
+        level1: '#F5F2FA',
+        level2: '#F1EDF8',
+        level3: '#ECE8F6',
+        level4: '#EAE5F5',
+        level5: '#E6E1F3',
+      },
+      brand: commonBrand,
+    },
+    dark: {
+      primary: '#BD93F9',
+      onPrimary: '#2B0A57',
+      primaryContainer: '#44337A',
+      onPrimaryContainer: '#EBDFFF',
+      secondary: '#FF79C6',
+      onSecondary: '#3D0021',
+      secondaryContainer: '#6B1F49',
+      onSecondaryContainer: '#FFD9EC',
+      tertiary: '#50FA7B',
+      onTertiary: '#003A17',
+      background: '#282A36',
+      onBackground: '#F8F8F2',
+      surface: '#2E303E',
+      onSurface: '#F8F8F2',
+      surfaceVariant: '#3B3D4E',
+      onSurfaceVariant: '#BFBBD0',
+      outline: '#6272A4',
+      error: '#FF5555',
+      onError: '#460009',
+      elevation: {
+        level0: 'transparent',
+        level1: '#31333F',
+        level2: '#343747',
+        level3: '#383B4C',
+        level4: '#3A3D50',
+        level5: '#3E4155',
+      },
+      brand: commonBrand,
+    },
+  },
+
+  nord: {
+    light: {
+      primary: '#5E81AC',
+      onPrimary: '#FFFFFF',
+      primaryContainer: '#DCE7F2',
+      onPrimaryContainer: '#0F2A44',
+      secondary: '#88C0D0',
+      onSecondary: '#00323C',
+      secondaryContainer: '#D4EEF4',
+      onSecondaryContainer: '#00232A',
+      tertiary: '#B48EAD',
+      onTertiary: '#FFFFFF',
+      background: '#ECEFF4',
+      onBackground: '#2E3440',
+      surface: '#FFFFFF',
+      onSurface: '#2E3440',
+      surfaceVariant: '#E5E9F0',
+      onSurfaceVariant: '#4C566A',
+      outline: '#7B8394',
+      error: '#BF616A',
+      onError: '#FFFFFF',
+      elevation: {
+        level0: 'transparent',
+        level1: '#F1F4F8',
+        level2: '#EDF0F6',
+        level3: '#E9EDF4',
+        level4: '#E6EBF3',
+        level5: '#E2E7F1',
+      },
+      brand: commonBrand,
+    },
+    dark: {
+      primary: '#88C0D0',
+      onPrimary: '#00313B',
+      primaryContainer: '#204854',
+      onPrimaryContainer: '#D4EEF4',
+      secondary: '#81A1C1',
+      onSecondary: '#0B2438',
+      secondaryContainer: '#243C51',
+      onSecondaryContainer: '#DCE7F2',
+      tertiary: '#B48EAD',
+      onTertiary: '#3C1F38',
+      background: '#2E3440',
+      onBackground: '#ECEFF4',
+      surface: '#3B4252',
+      onSurface: '#ECEFF4',
+      surfaceVariant: '#434C5E',
+      onSurfaceVariant: '#D8DEE9',
+      outline: '#8791A6',
+      error: '#BF616A',
+      onError: '#2B0A0D',
+      elevation: {
+        level0: 'transparent',
+        level1: '#3E4557',
+        level2: '#414A5C',
+        level3: '#454E62',
+        level4: '#475066',
+        level5: '#4B546C',
+      },
+      brand: commonBrand,
+    },
+  },
+
+  'tokyo-night': {
+    light: {
+      primary: '#34548A',
+      onPrimary: '#FFFFFF',
+      primaryContainer: '#D6E2FF',
+      onPrimaryContainer: '#001A41',
+      secondary: '#8C4351',
+      onSecondary: '#FFFFFF',
+      secondaryContainer: '#FFD9DE',
+      onSecondaryContainer: '#3B0716',
+      tertiary: '#33635C',
+      onTertiary: '#FFFFFF',
+      background: '#F4F4FB',
+      onBackground: '#1A1B26',
+      surface: '#FFFFFF',
+      onSurface: '#1A1B26',
+      surfaceVariant: '#E3E5F4',
+      onSurfaceVariant: '#45464F',
+      outline: '#767680',
+      error: '#BA1A1A',
+      onError: '#FFFFFF',
+      elevation: {
+        level0: 'transparent',
+        level1: '#F0F1FA',
+        level2: '#EBECF9',
+        level3: '#E6E8F8',
+        level4: '#E4E6F7',
+        level5: '#DFE1F6',
+      },
+      brand: commonBrand,
+    },
+    dark: {
+      primary: '#7AA2F7',
+      onPrimary: '#00296E',
+      primaryContainer: '#1F3A78',
+      onPrimaryContainer: '#D6E2FF',
+      secondary: '#F7768E',
+      onSecondary: '#5E1123',
+      secondaryContainer: '#7C2A3B',
+      onSecondaryContainer: '#FFD9DE',
+      tertiary: '#9ECE6A',
+      onTertiary: '#0C3A00',
+      background: '#1A1B26',
+      onBackground: '#C0CAF5',
+      surface: '#1F2335',
+      onSurface: '#C0CAF5',
+      surfaceVariant: '#2A2E42',
+      onSurfaceVariant: '#A9B1D6',
+      outline: '#565A6E',
+      error: '#FF757F',
+      onError: '#450A0F',
+      elevation: {
+        level0: 'transparent',
+        level1: '#222642',
+        level2: '#252A4A',
+        level3: '#282E52',
+        level4: '#2A3055',
+        level5: '#2D335C',
+      },
+      brand: commonBrand,
+    },
+  },
+
+  'one-dark': {
+    light: {
+      primary: '#4078F2',
+      onPrimary: '#FFFFFF',
+      primaryContainer: '#DCE4FF',
+      onPrimaryContainer: '#001B4E',
+      secondary: '#A626A4',
+      onSecondary: '#FFFFFF',
+      secondaryContainer: '#FCD8FA',
+      onSecondaryContainer: '#390037',
+      tertiary: '#50A14F',
+      onTertiary: '#FFFFFF',
+      background: '#FAFAFA',
+      onBackground: '#232326',
+      surface: '#FFFFFF',
+      onSurface: '#232326',
+      surfaceVariant: '#E7E7EA',
+      onSurfaceVariant: '#4D4D52',
+      outline: '#7D7D83',
+      error: '#E45649',
+      onError: '#FFFFFF',
+      elevation: {
+        level0: 'transparent',
+        level1: '#F5F5F7',
+        level2: '#F0F0F3',
+        level3: '#ECECEF',
+        level4: '#E9E9ED',
+        level5: '#E5E5E9',
+      },
+      brand: commonBrand,
+    },
+    dark: {
+      primary: '#61AFEF',
+      onPrimary: '#00325A',
+      primaryContainer: '#0C4A82',
+      onPrimaryContainer: '#DCE4FF',
+      secondary: '#C678DD',
+      onSecondary: '#4B0050',
+      secondaryContainer: '#652870',
+      onSecondaryContainer: '#FCD8FA',
+      tertiary: '#98C379',
+      onTertiary: '#1B3A0A',
+      background: '#282C34',
+      onBackground: '#ABB2BF',
+      surface: '#2C313A',
+      onSurface: '#ABB2BF',
+      surfaceVariant: '#3A3F4B',
+      onSurfaceVariant: '#9DA5B4',
+      outline: '#565C69',
+      error: '#E06C75',
+      onError: '#440E12',
+      elevation: {
+        level0: 'transparent',
+        level1: '#2F343E',
+        level2: '#333842',
+        level3: '#363C47',
+        level4: '#383E49',
+        level5: '#3C424E',
+      },
+      brand: commonBrand,
+    },
+  },
+
+  catppuccin: {
+    light: {
+      primary: '#8839EF',
+      onPrimary: '#FFFFFF',
+      primaryContainer: '#F0DFFF',
+      onPrimaryContainer: '#2E0060',
+      secondary: '#EA76CB',
+      onSecondary: '#FFFFFF',
+      secondaryContainer: '#FFD9F1',
+      onSecondaryContainer: '#40002A',
+      tertiary: '#04A5E5',
+      onTertiary: '#FFFFFF',
+      background: '#EFF1F5',
+      onBackground: '#4C4F69',
+      surface: '#FFFFFF',
+      onSurface: '#4C4F69',
+      surfaceVariant: '#E6E9EF',
+      onSurfaceVariant: '#6C6F85',
+      outline: '#9CA0B0',
+      error: '#D20F39',
+      onError: '#FFFFFF',
+      elevation: {
+        level0: 'transparent',
+        level1: '#F3F5F9',
+        level2: '#F0F2F7',
+        level3: '#ECEEF4',
+        level4: '#E9EBF2',
+        level5: '#E5E8EF',
+      },
+      brand: commonBrand,
+    },
+    dark: {
+      primary: '#CBA6F7',
+      onPrimary: '#3B0072',
+      primaryContainer: '#54219A',
+      onPrimaryContainer: '#F0DFFF',
+      secondary: '#F5C2E7',
+      onSecondary: '#54003A',
+      secondaryContainer: '#711B51',
+      onSecondaryContainer: '#FFD9F1',
+      tertiary: '#89DCEB',
+      onTertiary: '#00363D',
+      background: '#1E1E2E',
+      onBackground: '#CDD6F4',
+      surface: '#24243A',
+      onSurface: '#CDD6F4',
+      surfaceVariant: '#302F4A',
+      onSurfaceVariant: '#B0B6D6',
+      outline: '#585B70',
+      error: '#F38BA8',
+      onError: '#4C0018',
+      elevation: {
+        level0: 'transparent',
+        level1: '#28273F',
+        level2: '#2B2A45',
+        level3: '#2E2D4B',
+        level4: '#302F4E',
+        level5: '#343353',
+      },
+      brand: commonBrand,
+    },
+  },
+};
+
+export const THEME_PRESET_LABELS: Record<string, string> = {
+  default: 'Default',
+  github: 'GitHub',
+  dracula: 'Dracula',
+  nord: 'Nord',
+  'tokyo-night': 'Tokyo Night',
+  'one-dark': 'One Dark',
+  catppuccin: 'Catppuccin',
+};

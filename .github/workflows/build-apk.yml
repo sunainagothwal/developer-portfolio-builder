@@ -1,0 +1,92 @@
+name: Build test APK
+
+# One installable APK per pull request, plus an on-demand button for anything
+# else (a branch with no PR yet, a production/app-bundle test build, and so
+# on). The actual compile runs on EAS's build farm, not this runner and not
+# anyone's laptop — this job only starts it and waits for the link.
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+    inputs:
+      profile:
+        description: "eas.json build profile"
+        type: choice
+        options: [preview, development, production]
+        default: preview
+
+# A second push to the same PR should replace its in-flight build, not queue
+# behind it — otherwise a chain of quick commits burns Actions minutes on
+# builds nobody will download.
+concurrency:
+  group: apk-build-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Installs eas-cli and authenticates it with the EXPO_TOKEN secret.
+      # See the setup notes in the PR description / README for how to create
+      # that token — it is a one-time step, not something this workflow can
+      # do for itself.
+      - uses: expo/expo-github-action@v8
+        with:
+          token: ${{ secrets.EXPO_TOKEN }}
+          eas-version: latest
+
+      - name: Build on EAS
+        id: build
+        shell: bash
+        run: |
+          set -euo pipefail
+          PROFILE="${{ github.event.inputs.profile || 'preview' }}"
+          echo "Building profile: $PROFILE"
+
+          # `eas build` waits for the build by default and prints a
+          # "Build details: https://expo.dev/.../builds/<id>" line once it has
+          # one. That page hosts the finished APK plus an install QR code, so
+          # this workflow does not need to parse or re-host the artifact
+          # itself — just capture the URL EAS already printed.
+          eas build --platform android --profile "$PROFILE" --non-interactive 2>&1 | tee eas-build.log
+
+          BUILD_URL=$(grep -Eo 'https://expo\.dev/accounts/[^ ]+/builds/[a-zA-Z0-9-]+' eas-build.log | tail -1)
+          if [ -z "$BUILD_URL" ]; then
+            echo "Could not find a build URL in the EAS output — see the log above."
+            exit 1
+          fi
+          echo "url=$BUILD_URL" >> "$GITHUB_OUTPUT"
+
+      - name: Comment on the PR with the download link
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body:
+                '### 📱 Test APK is ready\n\n' +
+                '[Open the build page](${{ steps.build.outputs.url }}) — install directly, ' +
+                'or scan the QR code shown there with your phone.\n\n' +
+                '_Built from ' + context.sha.substring(0, 7) + '._',
+            });
+
+      - name: Add to the job summary
+        shell: bash
+        run: |
+          {
+            echo "### Test APK"
+            echo "[Open the build page](${{ steps.build.outputs.url }})"
+          } >> "$GITHUB_STEP_SUMMARY"
