@@ -37,7 +37,8 @@
           "photosPermission": "The app needs access to your photos to attach images to projects and your profile avatar."
         }
       ],
-      "expo-web-browser"
+      "expo-web-browser",
+      "expo-font"
     ],
     "extra": {
       "router": {
