@@ -25,8 +25,8 @@
         "backgroundColor": "#0B0E14"
       },
       "permissions": [
-        "READ_EXTERNAL_STORAGE",
-        "WRITE_EXTERNAL_STORAGE"
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
       ]
     },
     "plugins": [
@@ -42,7 +42,11 @@
     "extra": {
       "router": {
         "origin": false
+      },
+      "eas": {
+        "projectId": "494dc5bc-3444-48e4-b9d5-e7c40585ba16"
       }
-    }
+    },
+    "owner": "s.sunainaa"
   }
 }
