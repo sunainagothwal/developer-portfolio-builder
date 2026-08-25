@@ -208,16 +208,6 @@ export interface TimelineEvent {
   sourceId: string; // id of the underlying entity
 }
 
-/* ------------------------------ Checklist ----------------------------------- */
-
-export interface ChecklistItem {
-  id: ID;
-  label: string;
-  description?: string;
-  done: boolean;
-  category: string;
-}
-
 /* -------------------------------- Settings ---------------------------------- */
 
 export type ThemeMode = 'system' | 'light' | 'dark';

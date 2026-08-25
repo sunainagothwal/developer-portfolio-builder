@@ -30,7 +30,6 @@ const CAREER_TOOLS: ModuleItem[] = [
   { icon: 'file-account-outline', title: 'Resume Builder', description: 'Generate a PDF resume', route: ROUTES.resume },
   { icon: 'web', title: 'Portfolio Website', description: 'Export static HTML site', route: ROUTES.portfolioExport },
   { icon: 'timeline-clock-outline', title: 'Career Timeline', description: 'Your journey, visualized', route: ROUTES.timeline },
-  { icon: 'checkbox-marked-circle-outline', title: 'Portfolio Checklist', description: 'Readiness tracker', route: ROUTES.checklist },
 ];
 
 const GROWTH_MODULES: ModuleItem[] = [

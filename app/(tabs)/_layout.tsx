@@ -41,6 +41,13 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="interview-prep"
+        options={{
+          title: 'Interview Prep',
+          tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="head-question-outline" color={color} size={size} />,
+        }}
+      />
+      <Tabs.Screen
         name="settings"
         options={{
           title: 'Settings',

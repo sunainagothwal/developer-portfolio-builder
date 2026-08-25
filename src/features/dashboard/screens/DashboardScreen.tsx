@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Text, Avatar, ProgressBar } from 'react-native-paper';
+import { Text, Avatar } from 'react-native-paper';
 import { router } from 'expo-router';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Screen } from '@components/layouts/Screen';
@@ -12,7 +12,6 @@ import { useProfileStore } from '@store/profileStore';
 import { useProjectsStore } from '@store/projectsStore';
 import { useSkillsStore } from '@store/skillsStore';
 import { useExperienceStore } from '@store/experienceStore';
-import { useChecklistStore } from '@store/checklistStore';
 import { ROUTES } from '@constants/routes';
 import { relativeTime } from '@utils/date';
 
@@ -31,10 +30,9 @@ export default function DashboardScreen() {
   const { items: projects, loaded: projectsLoaded, load: loadProjects } = useProjectsStore();
   const { items: skills, loaded: skillsLoaded, load: loadSkills } = useSkillsStore();
   const { items: experience, loaded: experienceLoaded, load: loadExperience } = useExperienceStore();
-  const { items: checklist, loaded: checklistLoaded, load: loadChecklist } = useChecklistStore();
 
   const loadAll = async () => {
-    await Promise.all([loadProfile(), loadProjects(), loadSkills(), loadExperience(), loadChecklist()]);
+    await Promise.all([loadProfile(), loadProjects(), loadSkills(), loadExperience()]);
   };
 
   useEffect(() => {
@@ -48,18 +46,13 @@ export default function DashboardScreen() {
     setRefreshing(false);
   };
 
-  const checklistProgress = useMemo(() => {
-    if (!checklist.length) return 0;
-    return checklist.filter((c) => c.done).length / checklist.length;
-  }, [checklist]);
-
   const recentItems = useMemo(() => {
     return [...projects]
       .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
       .slice(0, 3);
   }, [projects]);
 
-  const isLoading = !projectsLoaded || !skillsLoaded || !experienceLoaded || !checklistLoaded;
+  const isLoading = !projectsLoaded || !skillsLoaded || !experienceLoaded;
   const firstName = profile?.fullName?.split(' ')[0] || 'there';
 
   const stats = [
@@ -104,25 +97,6 @@ export default function DashboardScreen() {
             ))}
           </View>
 
-          <SectionHeader
-            title="Portfolio readiness"
-            actionIcon="chevron-right"
-            onActionPress={() => router.push(ROUTES.checklist)}
-          />
-          <AppCard onPress={() => router.push(ROUTES.checklist)}>
-            <View style={styles.checklistRow}>
-              <Text variant="titleMedium">{Math.round(checklistProgress * 100)}% complete</Text>
-              <Text variant="bodySmall" style={{ color: theme.colors.onSurfaceVariant }}>
-                {checklist.filter((c) => c.done).length}/{checklist.length} tasks
-              </Text>
-            </View>
-            <ProgressBar
-              progress={checklistProgress}
-              color={theme.colors.primary}
-              style={{ height: 8, borderRadius: 4, marginTop: 10 }}
-            />
-          </AppCard>
-
           <SectionHeader title="Quick actions" />
           <View style={styles.quickGrid}>
             {QUICK_ACTIONS.map((action) => (
@@ -164,7 +138,6 @@ const styles = StyleSheet.create({
   header: { flexDirection: 'row', alignItems: 'center' },
   statsRow: { flexDirection: 'row', gap: 12, marginBottom: 24 },
   statCard: { flex: 1, alignItems: 'flex-start', marginBottom: 0 },
-  checklistRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   quickGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12, marginBottom: 8 },
   quickCard: { width: '47%', alignItems: 'center' },
 });

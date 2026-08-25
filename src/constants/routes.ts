@@ -39,9 +39,9 @@ export const ROUTES = {
 
   interviews: '/interviews',
   interviewForm: (id?: string) => (id ? `/interviews/form?id=${id}` : '/interviews/form'),
+  interviewPrep: '/(tabs)/interview-prep',
 
   timeline: '/timeline',
-  checklist: '/checklist',
   search: '/search',
   backup: '/backup',
   resume: '/resume',

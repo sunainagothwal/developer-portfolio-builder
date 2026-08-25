@@ -164,14 +164,6 @@ const CREATE_STATEMENTS: string[] = [
     updatedAt TEXT NOT NULL
   );`,
 
-  `CREATE TABLE IF NOT EXISTS checklist_items (
-    id TEXT PRIMARY KEY NOT NULL,
-    label TEXT NOT NULL,
-    description TEXT,
-    done INTEGER NOT NULL DEFAULT 0,
-    category TEXT NOT NULL DEFAULT 'general'
-  );`,
-
   `CREATE TABLE IF NOT EXISTS meta (
     key TEXT PRIMARY KEY NOT NULL,
     value TEXT NOT NULL
@@ -185,35 +177,6 @@ export async function initDatabase(): Promise<void> {
       await db.execAsync(stmt);
     }
   });
-  await seedDefaultChecklist(db);
-}
-
-async function seedDefaultChecklist(db: SQLite.SQLiteDatabase) {
-  const row = await db.getFirstAsync<{ count: number }>(
-    'SELECT COUNT(*) as count FROM checklist_items'
-  );
-  if (row && row.count > 0) return;
-
-  const defaults: Array<{ label: string; description: string; category: string }> = [
-    { label: 'Add a professional headline & bio', description: 'Make your profile summary compelling.', category: 'Profile' },
-    { label: 'Upload a profile photo', description: 'A friendly, professional headshot builds trust.', category: 'Profile' },
-    { label: 'Add at least 3 featured projects', description: 'Show your best work first.', category: 'Projects' },
-    { label: 'List your core skills', description: 'Categorize by language, framework, tools.', category: 'Skills' },
-    { label: 'Add your work experience', description: 'Include measurable achievements per role.', category: 'Experience' },
-    { label: 'Add education history', description: '', category: 'Education' },
-    { label: 'Export your resume as PDF', description: 'Keep a portable copy ready to send.', category: 'Resume' },
-    { label: 'Generate your portfolio website', description: 'Export static HTML you can host anywhere.', category: 'Portfolio' },
-    { label: 'Back up your data', description: 'Export a JSON backup regularly.', category: 'Maintenance' },
-  ];
-
-  await db.withTransactionAsync(async () => {
-    for (const d of defaults) {
-      await db.runAsync(
-        'INSERT INTO checklist_items (id, label, description, done, category) VALUES (?, ?, ?, 0, ?)',
-        [`seed-${d.label.slice(0, 12).replace(/\s+/g, '-').toLowerCase()}-${Date.now()}`, d.label, d.description, d.category]
-      );
-    }
-  });
 }
 
 /** Danger zone: wipes every table. Used by Backup & Restore before a full restore. */
@@ -222,7 +185,7 @@ export async function resetDatabase(): Promise<void> {
   const tables = [
     'profile', 'skills', 'projects', 'experiences', 'education',
     'certificates', 'achievements', 'notes', 'learning_items',
-    'interview_entries', 'checklist_items', 'meta',
+    'interview_entries', 'meta',
   ];
   await db.withTransactionAsync(async () => {
     for (const t of tables) {

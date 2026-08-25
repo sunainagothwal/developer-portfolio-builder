@@ -12,7 +12,7 @@ Built with **Expo Router + TypeScript + Zustand + SQLite + React Native Paper (M
 
 | Module | What it does |
 |---|---|
-| **Dashboard** | Stats, portfolio-readiness progress, quick actions, recent activity |
+| **Dashboard** | Stats, quick actions, recent activity |
 | **Profile** | Avatar, headline, bio, contact info, social links, availability status |
 | **Skills Manager** | Categorized, leveled skills with search & filter |
 | **Project Manager** | Rich projects: images, links, tech stack, linked skills, status, featured flag |
@@ -27,8 +27,7 @@ Built with **Expo Router + TypeScript + Zustand + SQLite + React Native Paper (M
 | **Learning Tracker** | Courses/books/videos with progress bars and status |
 | **Interview Tracker** | Job pipeline tracking with stage history per application |
 | **Career Timeline** | Auto-generated chronological visualization across all your data |
-| **Developer Toolbox** | Offline utilities: JSON formatter, Base64, color converter, timestamp converter, regex tester, Lorem Ipsum generator |
-| **Portfolio Checklist** | Readiness checklist with live completion tracking |
+| **Mock Interview Prep** | Upload a resume + target company, get AI-generated practice interview questions tailored to both |
 | **Search** | Instant fuzzy search across every entity in the app |
 | **Backup & Restore** | Full JSON export/import — your data, portable, anytime |
 | **Settings** | Light/Dark/System + 6 developer themes (GitHub, Dracula, Nord, Tokyo Night, One Dark, Catppuccin) |
@@ -40,7 +39,7 @@ Built with **Expo Router + TypeScript + Zustand + SQLite + React Native Paper (M
 ```
 developer-portfolio-builder/
 ├── app/                        # Expo Router routes (file-based navigation)
-│   ├── (tabs)/                 # Bottom tab navigator: Dashboard, Manage, Notes, Toolbox, Settings
+│   ├── (tabs)/                 # Bottom tab navigator: Dashboard, Manage, Notes, Settings
 │   ├── (auth)/                 # Reserved for future auth flows (app requires none today)
 │   ├── _layout.tsx             # Root layout: DB init, theming, splash screen
 │   └── index.tsx               # Entry redirect (onboarding vs dashboard)
